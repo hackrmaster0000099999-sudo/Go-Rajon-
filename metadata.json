@@ -1,0 +1,6 @@
+{
+  "name": "gorajon.site - Multi-Niche Blog & CMS",
+  "description": "Production-ready, SEO-optimized multi-niche blogging platform with high performance and editorial admin dashboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

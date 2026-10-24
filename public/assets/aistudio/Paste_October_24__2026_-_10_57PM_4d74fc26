@@ -1,0 +1,947 @@
+gorajon.site — Production-Ready Blogging Website
+
+1. Project Overview
+
+Build a complete, production-ready, SEO-focused multi-niche blogging website for gorajon.site.
+
+The website must allow a single administrator to publish and manage articles across multiple categories and subcategories through a secure admin dashboard.
+
+The public website must be minimalist, fast, responsive, accessible, and optimized for Google Organic Search.
+
+The project must be a functional full-stack application, not a static UI prototype.
+
+Primary Goals
+
+- Build a professional multi-niche blogging website.
+- Maximize organic search traffic potential.
+- Provide a simple but powerful admin dashboard.
+- Publish articles without redeploying the application for every content change.
+- Keep the design minimal and reader-focused.
+- Support Adsterra advertising initially and future Google AdSense integration.
+- Minimize unnecessary complexity and ongoing operational costs.
+
+2. Required Technology Stack
+
+Use the following technologies:
+
+- Framework: Next.js with App Router.
+- Language: TypeScript.
+- Styling: Tailwind CSS.
+- UI Components: Accessible, reusable components.
+- Database: Supabase PostgreSQL.
+- Authentication: Supabase Auth.
+- Server-side data access: Secure server-side Supabase client.
+- Hosting: Vercel.
+- Domain: gorajon.site.
+- Package manager: npm.
+
+Use stable, mutually compatible package versions.
+
+Do not introduce additional frameworks, databases, or backend services unless genuinely necessary.
+
+3. Website Design Requirements
+
+Create a minimalist, professional editorial design.
+
+Visual Style
+
+- Clean white or subtle neutral backgrounds.
+- Dark, highly readable text.
+- A restrained accent color.
+- Generous whitespace.
+- Consistent spacing and alignment.
+- Minimal borders and shadows.
+- Subtle transitions only when useful.
+- Responsive layouts for mobile, tablet, and desktop.
+
+Avoid:
+
+- Unnecessary graphics and illustrations.
+- Excessive gradients.
+- Large decorative hero sections.
+- Unnecessary marketing copy.
+- Excessive animations.
+- Unrelated widgets.
+- Cluttered layouts.
+- Artificially complicated UI elements.
+
+Typography
+
+Choose clean, modern, comfortable fonts with excellent readability.
+
+Requirements:
+
+- Comfortable article font size and line height.
+- Appropriate heading hierarchy.
+- Readable paragraph width.
+- Clear contrast.
+- Consistent typography across the website.
+- Proper rendering of Bengali and English text.
+
+Use a reliable font-loading strategy. Prefer self-hosted fonts or optimized local font files where practical.
+
+4. Public Website
+
+4.1 Homepage
+
+The homepage must display:
+
+- Website identity and logo.
+- Minimal navigation.
+- Search access.
+- Dynamic category navigation.
+- Recently published articles.
+- Article thumbnails when available.
+- Article titles.
+- Short excerpts when useful.
+- Publication dates when appropriate.
+- Pagination or another crawlable article-discovery mechanism.
+
+The homepage must automatically reflect published content from Supabase.
+
+Do not display drafts, scheduled articles whose publication time has not arrived, or unpublished content.
+
+Avoid unnecessary sections.
+
+4.2 Article Detail Page
+
+Every published article must have its own permanent, human-readable URL.
+
+Example:
+
+"https://gorajon.site/category-slug/article-slug"
+
+Use a consistent URL architecture. If a category changes, avoid unnecessarily breaking existing article URLs.
+
+Each article page must support:
+
+- Article title.
+- Article content.
+- Optional featured image.
+- Author attribution when configured.
+- Publication date.
+- Updated date when appropriate.
+- Category and subcategory links.
+- Proper heading hierarchy.
+- Internal article links.
+- Related articles when relevant.
+- Breadcrumb navigation.
+- Social sharing metadata.
+- Article-specific SEO metadata.
+
+Render article content safely. Sanitize any HTML that could introduce scripts or unsafe elements.
+
+Do not expose unpublished articles through public routes.
+
+4.3 Category Pages
+
+Each category must have a dedicated public page.
+
+Display:
+
+- Category name.
+- Optional category description.
+- Published articles in that category.
+- Article thumbnails and titles.
+- Pagination when necessary.
+
+Categories must be managed dynamically from Supabase.
+
+Do not hardcode category names in frontend components.
+
+4.4 Subcategory Pages
+
+Support subcategories associated with parent categories.
+
+Each subcategory must have its own configurable slug and public article listing.
+
+The administrator must be able to create, edit, and delete subcategories.
+
+4.5 Search
+
+Implement functional article search.
+
+Requirements:
+
+- Search article titles and relevant content.
+- Exclude unpublished articles.
+- Use a search input that works on mobile and desktop.
+- Provide a useful empty-results state.
+- Use URL query parameters where appropriate.
+- Avoid generating unlimited crawlable search-result URLs.
+
+For a small publication, start with PostgreSQL search capabilities and add more sophisticated search only if justified.
+
+4.6 Pagination
+
+Implement pagination for article listings.
+
+Requirements:
+
+- Stable page URLs.
+- Correct previous and next navigation.
+- No duplicated articles between pages.
+- Appropriate SEO metadata and canonical URLs.
+- Avoid infinite-scroll-only navigation.
+
+4.7 Essential Static Pages
+
+Create simple, manageable pages for:
+
+- About.
+- Contact.
+- Privacy Policy.
+- Terms and Conditions.
+- Disclaimer.
+
+These pages should contain editable content where appropriate.
+
+Do not fabricate business addresses, legal identities, or contact details. Use clearly marked placeholders until the administrator supplies accurate information.
+
+5. Admin Dashboard
+
+Create a dedicated admin area, separate from the public navigation.
+
+Suggested route:
+
+"/admin"
+
+All administrative pages must require authentication and server-side authorization.
+
+The admin dashboard should be simple and focused on publishing.
+
+5.1 Dashboard Overview
+
+Display only useful information:
+
+- Total published articles.
+- Total drafts.
+- Total categories.
+- Total subcategories.
+- Recently updated articles.
+
+Do not add unnecessary charts, analytics dashboards, advertising statistics, or complex reporting features.
+
+5.2 Article Management
+
+The administrator must be able to:
+
+- Create articles.
+- Edit existing articles.
+- Save drafts.
+- Preview articles before publishing.
+- Publish articles.
+- Unpublish articles.
+- Schedule publication for a future date.
+- Delete articles after confirmation.
+- Search and filter articles in the dashboard.
+- Manage article slugs.
+- Assign categories and subcategories.
+- Upload a featured image.
+- Set SEO title and meta description.
+- Set canonical URL when genuinely necessary.
+- Set an article's indexing preference.
+- Add image alternative text.
+- Update article publication and modification metadata.
+
+Publishing an article must update the public website without requiring a manual redeployment.
+
+Use server-side validation and database constraints.
+
+5.3 Article Editor
+
+Provide a practical, accessible article editor.
+
+It should support:
+
+- Article title.
+- URL slug.
+- Main article content.
+- Headings.
+- Paragraphs.
+- Lists.
+- Links.
+- Images.
+- Image alternative text.
+- Bold and italic formatting.
+- Blockquotes.
+- Optional captions.
+- Featured image.
+- Excerpt.
+- Category and subcategory selection.
+- Draft and publication status.
+- SEO title.
+- Meta description.
+
+The editor must work properly on mobile devices.
+
+Do not make the editing interface unnecessarily complicated.
+
+5.4 Category Management
+
+The administrator must be able to:
+
+- Create categories.
+- Edit category names.
+- Set unique category slugs.
+- Add optional descriptions.
+- Create subcategories.
+- Edit subcategories.
+- Delete categories and subcategories.
+- View associated article counts.
+
+Category names must not be hardcoded.
+
+Deleting a category must not silently destroy associated articles.
+
+Before deletion, check dependencies and require an explicit decision about reassignment or removal of category associations.
+
+Prevent invalid parent-child relationships and duplicate slugs.
+
+5.5 Media Management
+
+Provide a simple media workflow for article images.
+
+Support:
+
+- Featured image uploads.
+- Article image uploads.
+- Alternative text.
+- File-type validation.
+- File-size limits.
+- Clear upload errors.
+
+Use Supabase Storage for images if enabled in the project configuration.
+
+Use a public storage bucket only for content intended to be publicly accessible. Keep administrative files private.
+
+Do not upload sensitive credentials or private documents to public storage.
+
+5.6 Settings
+
+Keep settings limited to what is genuinely needed.
+
+Include:
+
+- Website name.
+- Website description.
+- Logo and favicon configuration.
+- Default SEO title.
+- Default meta description.
+- Default social-sharing image.
+- Contact email.
+- Advertising script configuration.
+- Default author display information.
+- Basic publishing settings.
+
+Do not add user management, multi-author permissions, membership management, newsletter automation, or advanced analytics unless explicitly requested.
+
+5.7 Admin Authentication
+
+Use Supabase Auth.
+
+Requirements:
+
+- Secure admin sign-in.
+- Sign-out.
+- Session validation.
+- Protected administrative routes.
+- Server-side authorization for every sensitive operation.
+- Secure password-reset workflow when configured.
+- Clear authentication errors.
+
+The initial system is for a single administrator.
+
+Do not implement public registration.
+
+Do not treat hiding admin buttons or checking a client-side role as security.
+
+The administrator's authorization must be enforced on the server and through appropriate database policies.
+
+6. Supabase Database Design
+
+Design a normalized PostgreSQL schema with appropriate foreign keys, unique constraints, indexes, and timestamps.
+
+6.1 articles
+
+Suggested fields:
+
+- id: UUID primary key.
+- title: text.
+- slug: text.
+- excerpt: text, nullable.
+- content: validated article content.
+- featured_image_url: text, nullable.
+- featured_image_alt: text, nullable.
+- seo_title: text, nullable.
+- meta_description: text, nullable.
+- canonical_url: text, nullable.
+- author_name: text, nullable.
+- status: draft, published, or scheduled.
+- published_at: timestamp, nullable.
+- created_at: timestamp.
+- updated_at: timestamp.
+- noindex: boolean, default false.
+
+Use appropriate uniqueness rules for public article slugs.
+
+6.2 categories
+
+Suggested fields:
+
+- id: UUID primary key.
+- name: text.
+- slug: text, unique.
+- description: text, nullable.
+- created_at: timestamp.
+- updated_at: timestamp.
+
+6.3 subcategories
+
+Suggested fields:
+
+- id: UUID primary key.
+- category_id: UUID foreign key.
+- name: text.
+- slug: text.
+- description: text, nullable.
+- created_at: timestamp.
+- updated_at: timestamp.
+
+Enforce suitable uniqueness constraints, including parent-category relationships.
+
+6.4 article_categories
+
+Use a join table if articles need to belong to multiple categories.
+
+Otherwise, use a simpler category relationship if the product requires one primary category per article.
+
+Choose one consistent model and implement it throughout the application.
+
+6.5 site_settings
+
+Store manageable website settings, such as:
+
+- Site name.
+- Site description.
+- Logo URL.
+- Favicon URL.
+- Default SEO metadata.
+- Contact email.
+- Default author information.
+- Advertising configuration.
+
+Do not store service-role keys, private API credentials, or secrets in this table.
+
+6.6 static_pages
+
+Suggested fields:
+
+- id: UUID primary key.
+- title: text.
+- slug: text, unique.
+- content: text or validated rich content.
+- seo_title: text, nullable.
+- meta_description: text, nullable.
+- updated_at: timestamp.
+
+Protect editable page content through the admin authorization system.
+
+7. Database Security
+
+Security is mandatory.
+
+Implement Row Level Security (RLS) on tables accessible through the Supabase client.
+
+Requirements:
+
+- Public users may read only published articles.
+- Public users may read public categories and subcategories.
+- Public users must not read drafts or unpublished content.
+- Only the authorized administrator may create or modify content.
+- Only the authorized administrator may manage categories and settings.
+- Private settings and administrative data must remain protected.
+- Storage upload and deletion policies must be appropriately restricted.
+- Every sensitive server action must verify authorization.
+
+Never expose the Supabase service-role key to the browser.
+
+Use environment variables for credentials.
+
+Client-side visibility checks are not a substitute for authorization.
+
+Do not create an admin role based only on a user-editable metadata field.
+
+Use a trusted authorization mechanism, such as a protected administrator allowlist or a securely managed database role.
+
+Provide database migrations and setup instructions.
+
+8. Rendering, Caching, and Publishing
+
+Use Next.js App Router with server-rendered public article pages where appropriate.
+
+The application must support publishing content dynamically without requiring a complete redeployment for every article.
+
+Implement a clear content invalidation strategy.
+
+When an article is published, edited, unpublished, or deleted:
+
+1. Validate the administrator's authorization.
+2. Validate and save the content in Supabase.
+3. Update the relevant article page.
+4. Invalidate or refresh cached article data.
+5. Refresh affected category and subcategory listings.
+6. Refresh homepage article listings.
+7. Update sitemap data when appropriate.
+
+Use Next.js revalidation APIs where compatible with the selected deployment architecture.
+
+If scheduled publishing is supported, use a reliable scheduled mechanism that can publish due articles even when nobody visits the website.
+
+Do not rely solely on browser timers.
+
+Ensure that unpublished or scheduled content does not accidentally appear publicly.
+
+Document any required Vercel configuration or scheduled jobs.
+
+9. SEO Requirements
+
+SEO is one of the highest priorities.
+
+9.1 Metadata
+
+Generate unique metadata for:
+
+- Homepage.
+- Article pages.
+- Category pages.
+- Subcategory pages.
+- Static pages.
+
+Support:
+
+- SEO title.
+- Meta description.
+- Canonical URL.
+- Open Graph metadata.
+- Social-sharing images.
+- Appropriate robots directives.
+
+Avoid duplicate titles and descriptions when practical.
+
+9.2 URL Structure
+
+Use clean, descriptive, stable URLs.
+
+Examples:
+
+- "/"
+- "/category/technology"
+- "/category/technology/tutorials"
+- "/technology/example-article"
+
+Choose one consistent article URL architecture.
+
+Avoid unnecessary query parameters, duplicate routes, and unstable identifiers in public URLs.
+
+9.3 Sitemap
+
+Generate a valid XML sitemap.
+
+Include eligible public pages and published articles.
+
+Exclude:
+
+- Draft articles.
+- Unpublished articles.
+- Administrative routes.
+- Private pages.
+- Noindex pages when appropriate.
+
+Update sitemap output when content changes.
+
+If the website grows substantially, implement sitemap splitting.
+
+9.4 Robots.txt
+
+Create a valid robots.txt file.
+
+Do not accidentally block public articles, CSS, JavaScript, or other resources needed for rendering.
+
+Disallow administrative routes where appropriate, while recognizing that robots.txt is not an access-control mechanism.
+
+9.5 Structured Data
+
+Implement valid JSON-LD where appropriate:
+
+- Organization or website information.
+- WebSite.
+- BlogPosting or Article.
+- BreadcrumbList.
+
+Use only accurate information.
+
+Do not invent ratings, reviews, author credentials, or other structured data.
+
+Validate structured data during testing.
+
+9.6 Internal Linking
+
+Implement useful links between:
+
+- Articles and their categories.
+- Articles and their subcategories.
+- Related articles when genuinely relevant.
+- Breadcrumb levels.
+- Pagination pages.
+
+Avoid artificial or keyword-stuffed internal links.
+
+9.7 Google Search Console
+
+Prepare the site for Google Search Console verification.
+
+Provide configuration instructions for:
+
+- Domain verification.
+- Sitemap submission.
+- Indexing diagnostics.
+- Search performance monitoring.
+
+Do not claim that indexing or ranking is guaranteed.
+
+9.8 SEO Content Integrity
+
+Preserve semantic HTML and server-rendered article content.
+
+Ensure that article text is available to search crawlers without requiring client-side interaction.
+
+Avoid automatically generating low-quality content.
+
+10. Performance and Accessibility
+
+Target excellent performance without sacrificing functionality.
+
+Requirements:
+
+- Responsive layouts.
+- Optimized images.
+- Appropriate image dimensions.
+- Lazy loading for below-the-fold images.
+- Efficient database queries.
+- Pagination for large article collections.
+- Minimal client-side JavaScript.
+- Avoid unnecessary third-party scripts.
+- Appropriate caching.
+- Accessible form labels.
+- Keyboard-accessible navigation.
+- Visible focus states.
+- Sufficient color contrast.
+- Semantic HTML.
+- Reduced-motion support.
+
+Use Next.js image optimization when compatible with the deployment configuration.
+
+Avoid loading large scripts before they are needed.
+
+Test representative mobile layouts and slower network conditions.
+
+Do not promise a specific Lighthouse score without testing.
+
+11. Advertising Integration
+
+The website will initially use Adsterra.
+
+Prepare an advertising configuration system that allows the administrator to manage approved advertising scripts and placements.
+
+Possible placements:
+
+- Within article content.
+- Between article sections.
+- After article content.
+- Within article listing layouts where appropriate.
+
+Maintain a clean reading experience.
+
+Requirements:
+
+- Avoid excessive advertising density.
+- Prevent advertisements from covering content.
+- Reserve layout space where possible.
+- Avoid unexpected layout shifts.
+- Keep advertising scripts separate from core application logic.
+- Do not execute arbitrary scripts supplied by untrusted users.
+- Do not expose secrets in advertising configuration.
+
+Do not hardcode a fake advertising publisher ID.
+
+If the administrator has not supplied advertising code, display no real advertisement and provide a clearly documented configuration point.
+
+Future Google AdSense Support
+
+Design the advertising integration so Google AdSense can be configured later without restructuring the entire application.
+
+Do not assume that approval is guaranteed.
+
+Follow the applicable advertising network policies.
+
+12. Security and Reliability
+
+Implement:
+
+- Secure authentication.
+- Server-side authorization.
+- Supabase RLS.
+- Input validation.
+- Rich-content sanitization.
+- Safe error handling.
+- Secure environment variables.
+- File upload restrictions.
+- Safe redirects.
+- Appropriate HTTP security headers.
+- Protection against unauthorized content modification.
+- Database constraints.
+- Confirmation before destructive actions.
+
+Do not display raw database errors or secret values to users.
+
+Do not include credentials in source code, generated documentation, browser bundles, or Git repositories.
+
+Provide an ".env.example" file containing placeholder names only.
+
+13. User Experience
+
+The public website should require no account for ordinary reading.
+
+Readers should be able to:
+
+- Browse articles.
+- Browse categories and subcategories.
+- Search articles.
+- Open article pages.
+- Follow internal links.
+- Navigate pagination.
+- Access essential policy pages.
+
+Do not add:
+
+- Public user registration.
+- Commenting systems.
+- Social networking features.
+- Paid subscriptions.
+- Membership tiers.
+- Unnecessary notifications.
+- Unrequested AI features.
+
+Keep the product focused on publishing and reading.
+
+14. Error and Empty States
+
+Implement clear user-facing states for:
+
+- No published articles.
+- No search results.
+- Missing article.
+- Missing category.
+- Invalid form data.
+- Upload failure.
+- Authentication failure.
+- Database connection problems.
+- Unauthorized admin access.
+- Failed article publication.
+
+Use concise messages and provide an appropriate next step.
+
+Do not expose stack traces or sensitive diagnostics.
+
+15. Testing Requirements
+
+Before declaring the application complete, test the following.
+
+Public Website
+
+- Homepage loads.
+- Article pages load.
+- Category and subcategory navigation works.
+- Search returns correct results.
+- Pagination works.
+- Drafts remain private.
+- Invalid URLs return appropriate responses.
+- Metadata is correct.
+- Sitemap contains eligible public URLs.
+
+Admin
+
+- Unauthenticated visitors cannot access protected functionality.
+- Authorized administrator can sign in.
+- Articles can be created and saved as drafts.
+- Articles can be previewed.
+- Articles can be published.
+- Articles can be edited.
+- Articles can be unpublished.
+- Articles can be deleted safely.
+- Categories and subcategories can be created, edited, and deleted.
+- Media upload works.
+- Invalid data is rejected.
+
+Publishing
+
+- A newly published article becomes available without a full application redeployment.
+- Edited articles display updated content.
+- Unpublished articles disappear from public listings.
+- Deleted articles no longer display as published content.
+- Relevant caches are invalidated.
+- Scheduled publishing works if implemented.
+
+Security
+
+- Drafts cannot be accessed by anonymous visitors.
+- Unauthorized users cannot modify database content.
+- Browser code contains no service-role key.
+- Supabase policies prevent unauthorized operations.
+- Upload restrictions work.
+- Rich content cannot inject executable scripts.
+
+Performance and SEO
+
+- Mobile layout works correctly.
+- Article content is server-rendered or otherwise crawlable.
+- Canonical URLs are correct.
+- Structured data is valid.
+- Sitemap and robots.txt work.
+- Images have appropriate alternative text.
+- No unnecessary layout shifts occur during normal loading.
+
+16. Deployment Requirements
+
+Prepare the project for Vercel deployment.
+
+Required deliverables:
+
+- Complete Next.js source code.
+- Organized project structure.
+- Supabase SQL migrations.
+- Supabase RLS policies.
+- ".env.example".
+- README with setup instructions.
+- Vercel deployment instructions.
+- Domain configuration instructions.
+- Google Search Console setup instructions.
+- Advertising configuration instructions.
+- Administrator account setup instructions.
+
+Use environment variables for the appropriate configuration values, including:
+
+"NEXT_PUBLIC_SUPABASE_URL"
+
+"NEXT_PUBLIC_SUPABASE_ANON_KEY"
+
+"SUPABASE_SERVICE_ROLE_KEY"
+
+The service-role key must remain server-side and must never be exposed to the browser.
+
+Only include environment variables that are actually required by the implementation.
+
+Do not hardcode production credentials.
+
+Do not claim that Supabase, Vercel, the domain, advertising accounts, or Search Console are connected unless the connection has actually been completed.
+
+17. Implementation Workflow
+
+Build the application in a controlled sequence.
+
+Phase 1: Foundation
+
+- Initialize Next.js with App Router and TypeScript.
+- Configure Tailwind CSS.
+- Establish the project structure.
+- Build the shared layout and design system.
+- Configure environment variables.
+
+Phase 2: Database and Authentication
+
+- Create Supabase schema.
+- Add migrations.
+- Configure RLS.
+- Implement administrator authentication.
+- Protect administrative operations.
+
+Phase 3: Public Website
+
+- Build homepage.
+- Build article detail pages.
+- Build category and subcategory pages.
+- Implement search and pagination.
+- Add essential static pages.
+
+Phase 4: Admin Dashboard
+
+- Build dashboard overview.
+- Build article editor.
+- Implement draft and publishing workflows.
+- Build category and subcategory management.
+- Implement media uploads.
+- Add essential settings.
+
+Phase 5: SEO and Performance
+
+- Implement metadata.
+- Implement sitemap and robots.txt.
+- Add structured data.
+- Optimize images and caching.
+- Add appropriate revalidation.
+
+Phase 6: Advertising and Deployment
+
+- Add configurable advertising placements.
+- Test publishing and cache invalidation.
+- Prepare Vercel deployment.
+- Connect the domain after configuration.
+- Document Google Search Console setup.
+
+Phase 7: Quality Assurance
+
+- Test public routes.
+- Test admin authorization.
+- Test publishing workflows.
+- Test database policies.
+- Test SEO output.
+- Test responsive layouts.
+- Resolve critical errors before completion.
+
+18. Google AI Studio Execution Instructions
+
+You are acting as a senior full-stack engineer, application architect, database designer, SEO engineer, and UI/UX designer.
+
+Your task is to implement the actual gorajon.site application described in this PRD.
+
+Important execution rules:
+
+1. Build functional application code, not just mockups.
+2. Use Next.js App Router and TypeScript.
+3. Use Supabase for persistent data and authentication.
+4. Keep all administrative mutations secure.
+5. Do not use mock articles as a substitute for a working database integration.
+6. If credentials are missing, implement the integration and clearly document the required configuration.
+7. Do not claim that unconfigured integrations are operational.
+8. Do not leave important buttons nonfunctional.
+9. Do not silently replace failed backend operations with fake successful responses.
+10. Do not expose secrets to the client.
+11. Do not implement unnecessary features outside this PRD.
+12. Do not sacrifice SEO for unnecessary client-side rendering.
+13. Ensure new content can be published without redeploying the entire application.
+14. Use an appropriate Next.js caching and revalidation strategy.
+15. Generate database migrations and RLS policies alongside application code.
+16. Use reusable components and maintainable architecture.
+17. Keep the design minimal and mobile-friendly.
+18. Resolve build errors and type errors before declaring the application ready.
+19. Clearly identify any remaining setup tasks that require manual action.
+20. Never fabricate deployment, testing, account-connection, or production-readiness results.
+
+If the complete application cannot be generated in one response, work incrementally while preserving the architecture and existing files.
+
+Do not replace completed functionality with placeholder code merely to finish faster.
+
+Start by inspecting the available project environment and creating the application foundation. Then implement the database integration, public website, administrator dashboard, publishing workflow, SEO, security, and deployment configuration.
+
+The final result must be a maintainable, functional foundation for gorajon.site, ready for the administrator to configure Supabase and deploy through Vercel.
